@@ -14,11 +14,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Directory directory = Directory(imageDir);
-    List<File>? files = directory
+    List<FileSystemEntity> files = directory
         .listSync()
         .where((file) => file.path.endsWith(".png"))
-        .cast<File>()
         .toList();
+
+    files
+        .sort((a, b) => b.statSync().modified.compareTo(a.statSync().modified));
 
     return MaterialApp(
       title: 'PrompTracker',
@@ -41,7 +43,7 @@ class MyApp extends StatelessWidget {
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2),
           itemBuilder: (BuildContext context, int index) {
-            return Image.file(files[index]);
+            return Image.file(files[index] as File);
           },
         ),
       ),
