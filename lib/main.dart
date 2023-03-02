@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -7,9 +8,18 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  final String imageDir = "images";
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    Directory directory = Directory(imageDir);
+    List<File>? files = directory
+        .listSync()
+        .where((file) => file.path.endsWith(".png"))
+        .cast<File>()
+        .toList();
+
     return MaterialApp(
       title: 'PrompTracker',
       theme: ThemeData(
@@ -25,9 +35,14 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-        appBar: AppBar(title: Text('Local Images')),
-        body: Center(
-          child: Image.asset('assets/my_image.png'),
+        appBar: AppBar(title: const Text('Local Images')),
+        body: GridView.builder(
+          itemCount: files.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2),
+          itemBuilder: (BuildContext context, int index) {
+            return Image.file(files[index]);
+          },
         ),
       ),
     );
