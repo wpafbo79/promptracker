@@ -1,5 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:yaml/yaml.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,7 +12,6 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   final String imageDir = "images";
-  final String metadataDir = "metadata";
 
   // This widget is the root of your application.
   @override
@@ -23,17 +25,18 @@ class MyApp extends StatelessWidget {
     files
         .sort((a, b) => b.statSync().modified.compareTo(a.statSync().modified));
 
-    List<String> metadata = [];
+    List<Map<String, dynamic>> metadata = [];
 
     for (var file in files) {
-      String fileName = file.path.split("/").last;
-      String metadataFile = "$metadataDir/$fileName.txt";
+      String metadataFile =
+          "${file.parent.path}/${file.path.split('/').last.split('.').first}.yml";
       File metadataContent = File(metadataFile);
       if (metadataContent.existsSync()) {
         String fileMetadata = metadataContent.readAsStringSync();
-        metadata.add(fileMetadata);
+        var yaml = loadYaml(fileMetadata);
+        metadata.add(json.decode(json.encode(yaml)));
       } else {
-        metadata.add("No metadata available");
+        metadata.add({"No metadata available": ""});
       }
     }
 
@@ -61,7 +64,20 @@ class MyApp extends StatelessWidget {
             return Column(
               children: [
                 Expanded(child: Image.file(files[index] as File)),
-                Text(metadata[index]),
+                Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: metadata[index].length,
+                    itemBuilder: (BuildContext context, int metadataIndex) {
+                      String key = metadata[index].keys.toList()[metadataIndex];
+                      dynamic value = metadata[index][key];
+                      return ListTile(
+                        title: Text(key),
+                        subtitle: Text(value.toString()),
+                      );
+                    },
+                  ),
+                ),
               ],
             );
           },
