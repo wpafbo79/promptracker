@@ -1,6 +1,6 @@
 # PrompTracker
 
-![image](https://user-images.githubusercontent.com/13511650/222287713-8c22f8d0-ba31-4a5a-ae23-8dad18b9c95d.png "Logo generated using InvokeAI Stable Diffusion using the following prompt: 'Create a logo for PrompTracker that represents the creativity and innovation of AI art' as suggested by ChatGPT.  Negative prompt: 'out of frame, split frame, cropped, duplicate, ugly, mutated, deformed, blurry, watermark, text, logo, oversaturated, high contrast, overexposed'  Model: stable-diffusion-2.1-768  Steps: 25  CFG: 7.5  Width: 768  Height: 768  Sampler: k_euler  Seed: 190820033  Noise Threshold: 0  Perlin Noise: 0")
+![image](logo.png "Logo generated using InvokeAI Stable Diffusion using the following prompt: 'Create a logo for PrompTracker that represents the creativity and innovation of AI art' as suggested by ChatGPT.  Negative prompt: 'out of frame, split frame, cropped, duplicate, ugly, mutated, deformed, blurry, watermark, text, logo, oversaturated, high contrast, overexposed'  Model: stable-diffusion-2.1-768  Steps: 25  CFG: 7.5  Width: 768  Height: 768  Sampler: k_euler  Seed: 190820033  Noise Threshold: 0  Perlin Noise: 0")
 
 PrompTracker is an app for studying prompts and models used in generating AI art. It displays images and metadata from a directory of images created with Stable Diffusion, including images generated with img2img.
 
