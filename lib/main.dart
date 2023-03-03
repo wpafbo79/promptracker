@@ -65,17 +65,41 @@ class MyApp extends StatelessWidget {
               children: [
                 Expanded(child: Image.file(files[index] as File)),
                 Expanded(
-                  child: ListView.builder(
+                  child: ListView(
                     shrinkWrap: true,
-                    itemCount: metadata[index].length,
-                    itemBuilder: (BuildContext context, int metadataIndex) {
-                      String key = metadata[index].keys.toList()[metadataIndex];
-                      dynamic value = metadata[index][key];
-                      return ListTile(
-                        title: Text(key),
-                        subtitle: Text(value.toString()),
-                      );
-                    },
+                    children: [
+                      ListTile(
+                        title: const Text("Prompt"),
+                        subtitle: Text(metadata[index]["prompt"] ?? ""),
+                      ),
+                      ListTile(
+                        title: const Text("Model"),
+                        subtitle: Text(metadata[index]["model"] ?? ""),
+                      ),
+                      ListTile(
+                        title: const Text("Steps"),
+                        subtitle:
+                            Text(metadata[index]["steps"]?.toString() ?? ""),
+                      ),
+                      ListTile(
+                        title: const Text("Seed"),
+                        subtitle:
+                            Text(metadata[index]["seed"]?.toString() ?? ""),
+                      ),
+                      if (metadata[index]["source"] != null &&
+                          metadata[index]["strength"] != null)
+                        ListTile(
+                          title: const Text("Source Image"),
+                          subtitle: Text(metadata[index]["source"] ?? ""),
+                        ),
+                      if (metadata[index]["source"] != null &&
+                          metadata[index]["strength"] != null)
+                        ListTile(
+                          title: const Text("Strength"),
+                          subtitle: Text(
+                              metadata[index]["strength"]?.toString() ?? ""),
+                        ),
+                    ],
                   ),
                 ),
               ],
