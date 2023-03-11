@@ -13,6 +13,9 @@ class AppConfig {
     }
     final contents = await configFile.readAsString();
     final json = jsonDecode(contents);
-    return AppConfig(imageDirectory: json['imageDirectory']);
+    final imageDirectory = json['imageDirectory'];
+    final normalizedImageDirectory = imageDirectory.replaceAll(
+        '\\', '/'); // replace Windows-style backslashes with forward slashes
+    return AppConfig(imageDirectory: normalizedImageDirectory);
   }
 }
