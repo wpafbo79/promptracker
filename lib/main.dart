@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:promptracker/home_screen.dart';
+import 'package:promptracker/image_directory.dart';
 
 void main() {
   runApp(const PrompTrackerApp());
@@ -11,9 +12,9 @@ class PrompTrackerApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'PrompTracker',
-      home: HomeScreen(),
+      home: HomeScreen(imageDirectory: ImageDirectory()),
     );
   }
 }
