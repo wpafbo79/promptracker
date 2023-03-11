@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:promptracker/home_screen.dart';
+
 void main() {
   runApp(const PrompTrackerApp());
 }
@@ -9,16 +11,9 @@ class PrompTrackerApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'PrompTracker',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('PrompTracker'),
-        ),
-        body: const Center(
-          child: Text('Welcome to PrompTracker!'),
-        ),
-      ),
+      home: HomeScreen(),
     );
   }
 }
