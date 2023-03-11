@@ -1,10 +1,13 @@
 import 'dart:io';
 
 class ImageDirectory {
+  final String directoryPath;
   static const imageExtensions = ['jpg', 'jpeg', 'png'];
 
+  ImageDirectory(this.directoryPath);
+
   Future<List<File>> getImages() async {
-    final directory = Directory('/path/to/user/directory');
+    final directory = Directory(directoryPath);
     final files = await directory.list().toList();
     final imageFiles = files
         .where((file) =>
